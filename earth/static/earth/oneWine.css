@@ -1,0 +1,15 @@
+#wineType {
+	text-align: center;
+}
+
+#wineGlass {
+	z-index: -2;
+	rotate: 360deg;
+	position: fixed;
+	height: 50%;
+	top: 50px;
+}
+
+body {
+	background-color: transparent;
+}

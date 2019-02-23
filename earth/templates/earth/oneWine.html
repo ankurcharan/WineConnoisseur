@@ -1,0 +1,64 @@
+{% load static %}
+
+{% comment %} bootstrap css {% endcomment %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% comment %} bootstrap js {% endcomment %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<link rel='stylesheet' href="{% static 'earth/oneWine.css' %}">
+<script src="{% static 'earth/js/oneWine.js' %}"></script>
+
+{% comment %} navbar {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="/">Wine Connoisseur</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="/wines">Wines</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+{% if error_message %}
+	<p>Error</p>
+{% else %}
+
+	<img id="wineGlass" src="{% static 'earth/img/wine-glass.png' %}">
+
+	<div class='container'>
+		<h1 id='wineType'>{{ wine_type }}</h1>
+		
+		<span>Sort By Price: </span>
+
+		<div id='sortPref' class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="col col-sm-6 col-lg-6 btn btn-secondary">
+				<input onclick='sortPriceAsc()' type="radio" name="priceSort" id="asc" value='asc' autocomplete="off">Ascending
+			</label>
+			<label class="btn btn-secondary">
+				<input onclick='sortPriceDesc()' type="radio" name="priceSort" id="desc" value='desc' autocomplete="off">Descending
+			</label>
+		</div>
+		<br>
+		<br>
+		{% for wine in results %}
+				<div class="card" style="">
+					<div class="card-body">
+						<h5 class="card-title">{{ wine.country }}</h5>
+						<h6 class="card-subtitle mb-2 text-muted">{{ wine.province }}</h6>
+						<p class="card-text">{{ wine.description }}</p>
+						<p class="card-text">Designation: {{ wine.designation }}</p>
+						<p class="card-text">Price: {{ wine.price }}</p>
+					</div>
+				</div>
+		{% endfor %}
+	</div>
+{% endif %}
